@@ -84,6 +84,7 @@ for (var i = 0; i <= 17; i++) {
         }
     });
 }
+//return flight's data
 for (var i = 0; i <= 18; i++) {
     $('#WDSEffect_table_1').each((e, el) => {
 
@@ -101,6 +102,7 @@ for (var i = 0; i <= 18; i++) {
             .find('#toggleId_1_' + i + ' > table > tbody > tr:nth-child(2) > td.route.last > span:nth-child(3) > span')
             .text();
 
+        // check only for direct flight's
         if (out_london == "London" && out_stockholm == "Stockholm") {
             var return_price = $(el)
                 .find('#choice_1_' + i + '_ECONBG > span.price > #price_1_' + i + '_ECONBG')
@@ -121,6 +123,7 @@ for (var i = 0; i <= 18; i++) {
                 ReturnTimeStochholm: return_arr_time
             };
         }
+        //check flights with connection at Oslo
         if (out_london == "London" && out_oslo == "Oslo") {
             var return_conn_price = $(el)
                 .find('#choice_1_' + i + '_ECONBG > span.price > #price_1_' + i + '_ECONBG')
@@ -154,20 +157,23 @@ for (var i = 0; i <= 18; i++) {
     });
 }
 
-
 //console results of all direct flight's
 console.table(direct_data)
+
 //Collect all prices and return cheapest price
 //return array with price
 direct_cheap = direct_data.map(Number => Number.Price);
-//return elments which a not empty
+
+//return elements which a not empty
 direct_cheap = direct_cheap.filter(function (el) {
     return el != null;
 });
+
 //convert string to number with . seperator
 direct_cheap = direct_cheap.map(function (x) {
     return parseFloat(x.replace(/,/, '.'));
 });
+
 //find cheapest price
 direct_cheap = Math.min(...direct_cheap)
 console.log("Cheapest price is: " + direct_cheap + ' EUR');
