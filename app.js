@@ -43,7 +43,7 @@ for (var i = 0; i <= 17; i++) {
             //put all data in object
             direct_data[i] = {
                 Day: day_dep,
-                Price: price,
+                Price: price + ' EUR',
                 StockholmDepartureTime: dep_time,
                 LondonArrivalTime: arr_time
             };
@@ -73,7 +73,7 @@ for (var i = 0; i <= 17; i++) {
             //put data in object
             conn_data[i] = {
                 Day: day_dep,
-                ConnPrice: conn_price,
+                ConnPrice: conn_price + ' EUR',
                 Stockholm: conn_time_in_stockholm,
                 OsloArr: conn_time_in_oslo,
                 OsloDep: conn_dep_time_in_oslo,
@@ -116,7 +116,7 @@ for (var i = 0; i <= 18; i++) {
 
             return_data[i] = {
                 ReturnDay: return_day,
-                ReturnPrice: return_price,
+                ReturnPrice: return_price + ' EUR',
                 ReturnTimeLondon: return_dep_time,
                 ReturnTimeStochholm: return_arr_time
             };
@@ -144,11 +144,11 @@ for (var i = 0; i <= 18; i++) {
 
             return_data_conn[i] = {
                 ReturnDay: return_day,
-                ReturnPrice: return_conn_price,
+                ReturnPrice: return_conn_price + ' EUR',
                 ReturnTime: return_conn_dep_london,
                 ReturnStopArrTime: return_conn_arr_oslo,
                 ReturnStopDepTime: return_conn_dep_oslo,
-                ReturnTimeFinal: return_conn_arr_stockholm
+                ReturnTimeStock: return_conn_arr_stockholm
             };
         }
     });
@@ -159,57 +159,57 @@ for (var i = 0; i <= 18; i++) {
 console.table(direct_data)
 //Collect all prices and return cheapest price
 //return array with price
-var direct_cheap = direct_data.map(Number => Number.Price);
+direct_cheap = direct_data.map(Number => Number.Price);
 //return elments which a not empty
-var direct_cheap_filtered = direct_cheap.filter(function (el) {
+direct_cheap = direct_cheap.filter(function (el) {
     return el != null;
 });
 //convert string to number with . seperator
-var direct_cheap_result = direct_cheap_filtered.map(function (x) {
+direct_cheap = direct_cheap.map(function (x) {
     return parseFloat(x.replace(/,/, '.'));
 });
 //find cheapest price
-direct_cheap_result = Math.min(...direct_cheap_result)
-console.log("Cheapest price is: " + direct_cheap_result);
+direct_cheap = Math.min(...direct_cheap)
+console.log("Cheapest price is: " + direct_cheap + ' EUR');
 
 
 //flight with connection at Oslo
 console.table(conn_data)
-var conn_cheap = conn_data.map(Number => Number.ConnPrice);
-var conn_cheap_filtered = conn_cheap.filter(function (el) {
+conn_cheap = conn_data.map(Number => Number.ConnPrice);
+conn_cheap = conn_cheap.filter(function (el) {
     return el != null;
 });
-var conn_cheap_result = conn_cheap_filtered.map(function (x) {
+conn_cheap = conn_cheap.map(function (x) {
     return parseFloat(x.replace(/,/, '.'));
 });
-conn_cheap_result = Math.min(...conn_cheap_result)
-console.log("Cheapest price is: " + conn_cheap_result);
+conn_cheap = Math.min(...conn_cheap)
+console.log("Cheapest price is: " + conn_cheap + ' EUR');
 
 
 
 //return flight's data
 console.table(return_data)
-var return_cheap = return_data.map(Number => Number.ReturnPrice);
-var return_cheap_filtered = return_cheap.filter(function (el) {
+return_cheap = return_data.map(Number => Number.ReturnPrice);
+return_cheap = return_cheap.filter(function (el) {
     return el != null;
 });
-var return_cheap_result = return_cheap_filtered.map(function (x) {
+return_cheap = return_cheap.map(function (x) {
     return parseFloat(x.replace(/,/, '.'));
 });
-return_cheap_result = Math.min(...return_cheap_result)
-console.log("Cheapest price is: " + return_cheap_result);
+return_cheap = Math.min(...return_cheap)
+console.log("Cheapest price is: " + return_cheap + ' EUR');
 
 
 
 //return flights with connection at Oslo
 console.table(return_data_conn)
-var cheap_return_conn = return_data_conn.map(Number => Number.ReturnPrice);
-var cheap_return_conn_filtered = cheap_return_conn.filter(function (el) {
+cheap_return_conn = return_data_conn.map(Number => Number.ReturnPrice);
+cheap_return_conn = cheap_return_conn.filter(function (el) {
     return el != null;
 });
-var cheap_return_conn_result = cheap_return_conn_filtered.map(function (x) {
+cheap_return_conn = cheap_return_conn.map(function (x) {
     return parseFloat(x.replace(/,/, '.'));
 });
-cheap_return_conn_result = Math.min(...cheap_return_conn_result)
-console.log("Cheapest price is: " + cheap_return_conn_result);
+cheap_return_conn = Math.min(...cheap_return_conn)
+console.log("Cheapest price is: " + cheap_return_conn + ' EUR');
 
